@@ -4,7 +4,7 @@ requests
 bs4 
 shortzy 
 datetime 
-pytz 
+python_version >= "3.9" 
 aiohttp
 yt-dlp
 youtube-dl
