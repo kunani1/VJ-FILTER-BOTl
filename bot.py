@@ -2,8 +2,9 @@
 # Subscribe YouTube Channel For Amazing Bot @Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
-import sys, glob, importlib, logging, logging.config, pytz, asyncio
+import sys, glob, importlib, logging, logging.config, asyncio
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 # Get logging configurations
 logging.config.fileConfig('logging.conf')
@@ -25,7 +26,7 @@ from info import *
 from utils import temp
 from typing import Union, Optional, AsyncGenerator
 from Script import script 
-from datetime import date, datetime 
+from datetime import date, datetime
 from aiohttp import web
 from plugins import web_server
 
@@ -37,7 +38,6 @@ ppath = "plugins/*.py"
 files = glob.glob(ppath)
 TechVJBot.start()
 loop = asyncio.get_event_loop()
-
 
 async def start():
     print('\n')
@@ -67,7 +67,7 @@ async def start():
     temp.B_NAME = me.first_name
     logging.info(LOG_STR)
     logging.info(script.LOGO)
-    tz = pytz.timezone('Asia/Kolkata')
+    tz = ZoneInfo('Asia/Kolkata')
     today = date.today()
     now = datetime.now(tz)
     time = now.strftime("%H:%M:%S %p")
@@ -78,10 +78,8 @@ async def start():
     await web.TCPSite(app, bind_address, PORT).start()
     await idle()
 
-
 if __name__ == '__main__':
     try:
         loop.run_until_complete(start())
     except KeyboardInterrupt:
         logging.info('Service Stopped Bye 👋')
-
